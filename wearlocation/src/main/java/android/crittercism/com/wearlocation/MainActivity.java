@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
-import android.whitewaterlabs.com.wearlocation.R;
 import android.widget.TextView;
 
 import com.crittercism.app.Crittercism;

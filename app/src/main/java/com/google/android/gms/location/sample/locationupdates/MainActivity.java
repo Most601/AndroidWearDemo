@@ -355,27 +355,6 @@ public class MainActivity extends ActionBarActivity implements
         }
     }
 
-    /**
-     * Callback that fires when the location changes.
-     */
-    @Override
-    public void onLocationChanged(Location location) {
-        mCurrentLocation = location;
-        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-        updateUI();
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/location");
-        putDataMapReq.getDataMap().putDouble("latitude", mCurrentLocation.getLatitude());
-        putDataMapReq.getDataMap().putDouble("longitude", mCurrentLocation.getLongitude());
-        putDataMapReq.getDataMap().putString("updated", mLastUpdateTime);
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        PendingResult<DataApi.DataItemResult> pendingResult =
-                Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
-
-        Toast.makeText(this, getResources().getString(R.string.location_updated_message),
-                Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onConnectionSuspended(int cause) {
         // The connection to Google Play services was lost for some reason. We call connect() to
@@ -405,5 +384,27 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public void onDataChanged(DataEventBuffer dataEvents) {
         Log.i(TAG, "Data changed phone");
+    }
+
+
+    /**
+     * Callback that fires when the location changes.
+     */
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
+        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+        updateUI();
+
+        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/location");
+        putDataMapReq.getDataMap().putDouble("latitude", mCurrentLocation.getLatitude());
+        putDataMapReq.getDataMap().putDouble("longitude", mCurrentLocation.getLongitude());
+        putDataMapReq.getDataMap().putString("updated", mLastUpdateTime);
+        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
+        PendingResult<DataApi.DataItemResult> pendingResult =
+                Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
+
+        Toast.makeText(this, getResources().getString(R.string.location_updated_message),
+                Toast.LENGTH_SHORT).show();
     }
 }

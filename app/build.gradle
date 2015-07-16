@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId 'android.whitewaterlabs.com.wearlocation'
+        applicationId 'android.crittercism.com.wearlocation'
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1
